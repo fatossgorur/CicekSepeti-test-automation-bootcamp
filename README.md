@@ -1,4 +1,4 @@
-# FatosGorur_Homework
+# CicekSepeti-test-automation-bootcamp
 ÇiçekSepeti Test Otomasyon Bootcamp Homework
 
 
