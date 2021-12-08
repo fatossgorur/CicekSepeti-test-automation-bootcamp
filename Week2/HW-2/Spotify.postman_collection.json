@@ -1,0 +1,935 @@
+{
+	"info": {
+		"_postman_id": "ad5dcf07-7cbf-497d-b56c-3ab85581ed32",
+		"name": "Spotify",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users Profile",
+			"item": [
+				{
+					"name": "Get Current User's Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Check response\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.country).to.eql(\"TR\");\r",
+									"    pm.expect(jsonData.display_name).to.eql(\"SpotifyApiTest\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.not.be.error; \r",
+									"    pm.response.to.not.have.jsonBody(\"\"); \r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"});\r",
+									"\r",
+									"pm.test(\"API response contains the expected fields\", () => {\r",
+									"  const response = pm.response.json();\r",
+									"  pm.expect(response).to.have.property(\"type\", \"user\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User's Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Check response\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.display_name).to.eql(\"SpotifyApiTest\");\r",
+									"    pm.expect(jsonData.type).to.eql(\"user\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.not.be.error; \r",
+									"    pm.response.to.not.have.jsonBody(\"\"); \r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Search for Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.not.be.error; \r",
+									"    pm.response.to.not.have.jsonBody(\"\"); \r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/search?q=Dino%20James&type=track",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "Dino%20James"
+								},
+								{
+									"key": "type",
+									"value": "track"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Playlists",
+			"item": [
+				{
+					"name": "Get User's Playlists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.not.be.error; \r",
+									"    pm.response.to.not.have.jsonBody(\"\"); \r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", () => {\r",
+									"  pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}/playlists",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}",
+								"playlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Playlist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Check response\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"Fatos Gorur\");\r",
+									"    pm.expect(jsonData.description).to.eql(\"New playlist description\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.not.be.error; \r",
+									"    pm.response.to.not.have.jsonBody(\"\"); \r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"});\r",
+									"\r",
+									"pm.test(\"API response contains the expected fields\", () => {\r",
+									"  const response = pm.response.json();\r",
+									"  pm.expect(response).to.have.property(\"type\", \"playlist\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Fatos Gorur\",\"description\":\"New playlist description\",\"public\":true}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}/playlists",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}",
+								"playlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Playlist Items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.not.be.error; \r",
+									"    pm.response.to.not.have.jsonBody(\"\"); \r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/playlists/{{playlist_id}}/tracks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"playlists",
+								"{{playlist_id}}",
+								"tracks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Playlist Cover Image",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.not.be.error; \r",
+									"    pm.response.to.not.have.jsonBody(\"\"); \r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/playlists/{{playlist_id}}/images",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"playlists",
+								"{{playlist_id}}",
+								"images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Browse Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Check response\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(\"summer\");\r",
+									"    pm.expect(jsonData.name).to.eql(\"Summer\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.not.be.error; \r",
+									"    pm.response.to.not.have.jsonBody(\"\"); \r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/browse/categories/summer",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"browse",
+								"categories",
+								"summer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Playlist Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Updated Playlist\",\"description\":\"Updated playlist description\",\"public\":false}"
+						},
+						"url": {
+							"raw": "{{base_url}}/playlists/{{playlist_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"playlists",
+								"{{playlist_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Browse",
+			"item": [
+				{
+					"name": "Get Several Browse Categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.not.be.error; \r",
+									"    pm.response.to.not.have.jsonBody(\"\"); \r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/browse/categories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"browse",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category's Playlists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.not.be.error; \r",
+									"    pm.response.to.not.have.jsonBody(\"\"); \r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/browse/categories/{{category_id}}/playlists",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"browse",
+								"categories",
+								"{{category_id}}",
+								"playlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Browse Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Check response\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(\"summer\");\r",
+									"    pm.expect(jsonData.name).to.eql(\"Summer\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.not.be.error; \r",
+									"    pm.response.to.not.have.jsonBody(\"\"); \r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"});\r",
+									"\r",
+									"pm.test(\"API response not contains the expected fields\", () => {\r",
+									"  const response = pm.response.json();\r",
+									"  pm.expect(response).to.not.have.property(\"href\", \"//summer\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/browse/categories/{{category_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"browse",
+								"categories",
+								"{{category_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Featured Playlists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Check response\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"Editor's picks\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.not.be.error; \r",
+									"    pm.response.to.not.have.jsonBody(\"\"); \r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/browse/featured-playlists",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"browse",
+								"featured-playlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Available Genre Seeds",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Check response\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.genres).to.not.eql(\"Editor's picks\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.not.be.error; \r",
+									"    pm.response.to.not.have.jsonBody(\"\"); \r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/recommendations/available-genre-seeds",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recommendations",
+								"available-genre-seeds"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Markets",
+			"item": [
+				{
+					"name": "Get Available Markets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Check response\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.markets).to.not.eql(\"qw\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.not.be.error; \r",
+									"    pm.response.to.not.have.jsonBody(\"\"); \r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/markets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"markets"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
