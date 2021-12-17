@@ -12,9 +12,9 @@ class LoginPage():
         self.account_name_id = "nav-link-accountList-nav-line-1"
 
     def login(self):
-        self.driver.find_element(By.ID, self.email_id).send_keys("fatos.98gorur@hotmail.com")
+        self.driver.find_element(By.ID, self.email_id).send_keys("//email//")
         self.driver.find_element(By.CLASS_NAME, self.continue_classname).click()
-        self.driver.find_element(By.ID, self.password_id).send_keys("fats98gorur")
+        self.driver.find_element(By.ID, self.password_id).send_keys("//password//")
         self.driver.find_element(By.ID, self.sign_id).click()
 
     def get_account_name(self):
