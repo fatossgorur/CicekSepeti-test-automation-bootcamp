@@ -1,53 +1,48 @@
-# netcore-automation-test
+# python-automation-test
 
-◻️ Bu projeler **.NET Core** ve kullanılarak www.amazon.com.tr için yazılmış web test projesidir. Projede Page Object Pattern kullanılmıştır.
+◻️ Bu proje **Python** kullanılarak www.amazon.com.tr için yazılmış web test projesidir. Projede Page Object Pattern kullanılmıştır.
 
-◻️ Ide olarak **Visual Studio Code** kullanılmıştır. 
+◻️ Ide olarak **PyCharm** kullanılmıştır. 
 
-◻️ **NuGet Package Manager: Add Package** ile ilgili paketlerimizi eklememiz gerekmektedir. 
-(Selenium.WebDriver, Selenium.WebDriver.ChromeDriver (Chrome sürümünüz ile uyumlu olmalıdır), Microsoft.TestPlatform.TestHost (release versiyonu))
+◻️ Bir test projesi oluşturacağımız için ilk olarak **pytest import** etmemiz gerekmektedir.
 
-◻️ Proje hakkında daha fazla bilgi için medium yazımı okuyabilirsiniz. -->[.NET Core ile Test Otomasyon](https://fatosgorur.medium.com/net-core-ile-test-otomasyon-df1558dfd965)
+◻️ Proje hakkında daha fazla bilgi için medium yazımı okuyabilirsiniz. -->[Python ile Otomasyon Testi](https://fatosgorur.medium.com/python-ile-otomasyon-testi-821ea8a533e3)
 
 
-> **LoginTest : SuccessLoginTest()**
+> **TestLogin : test_login()**
 
-**Assertion : Username is visible on home page and not null**
+**Assertion : My username is the same as the username on the home page**
 
 ```
-   Assert.IsNotNull(name);
+   assert account_name == my_account_name
 ```
 
 
-> **ProductTest :  BestSellersCategoryTest()**
+> **TestProduct : test_best_sellers_category()**
 
 **Assertion : Check best sellers category page for mobile phones and accessories**
 
 ```
-  Assert.That(BestSellersResultsTitle.Contains(BestSellersPageTitle));
+   assert page_title != result_page
 ```
 
-> **ProductDetailTest : SelectedProductNameTest()**
+> **TestProductDetail :  test_selected_product_name()**
 
 **Assertion : Check selected product name**
 
 ```
-   Assert.AreEqual(BestSellersFirstProductName, SelectProductName);
+     assert first_product_name == product_name
 ```
 
-> **CartTest : CheckCartStatusTest()**
+> **TestCart() : test_check_cart_status()**
 
 **Assertion : Check the status in the cart** 
 
 ```
-    if (!TotalProduct.Contains("0"))
-            {
-                Assert.Pass("You have product in your cart.");
-            }
-            else
-            {
-                Assert.AreEqual(EmptyCart, EmptyCartText);
-            }
+    if '0' not in total_product:
+            print("You have product in your cart.")
+        else:
+            assert empty_cart == empty_cart_text
 ```
 
 
