@@ -1,6 +1,6 @@
 # netcore-automation-test
 
-◻️ Bu projeler **.NET Core** ve kullanılarak www.amazon.com.tr için yazılmış web test projesidir. Projede Page Object Pattern kullanılmıştır.
+◻️ Bu proje **.NET Core** kullanılarak www.amazon.com.tr için yazılmış web test projesidir. Projede Page Object Pattern kullanılmıştır.
 
 ◻️ Ide olarak **Visual Studio Code** kullanılmıştır. 
 
