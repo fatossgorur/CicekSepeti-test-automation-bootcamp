@@ -34,3 +34,9 @@
 🔹 [Python Web Testing --> Amazon.com UI Test](https://github.com/fatossgorur/CicekSepeti-test-automation-bootcamp/tree/main/Week4/python-automation-test)
 
 🔹 [Python ile Test Otomasyon Hakkında Medium Yazısı](https://fatosgorur.medium.com/python-ile-otomasyon-testi-821ea8a533e3)
+
+> **5. Hafta:**
+> 
+🔹 [Appium Mobile Testing in Java](https://github.com/fatossgorur/CicekSepeti-test-automation-bootcamp/tree/main/Week5/appium-mobile-test)
+
+🔹 [Appium Mobile Testing in Java with Cucumber Framework](https://github.com/fatossgorur/CicekSepeti-test-automation-bootcamp/tree/main/Week5/appium-cucumber-project)
