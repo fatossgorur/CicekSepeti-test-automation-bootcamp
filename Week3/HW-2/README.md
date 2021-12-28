@@ -8,34 +8,57 @@
 
 Test projemizi çalıştırabilmemiz için daha önce oluşturduğumuz **runner package**’nın altına **RunnerAll** adında bir sınıf oluşturdum. **@CucumberOptions** etiketinde yer alan **features** için yol olarak feature dosyalarınızın yer aldığı package’ın yolunu, **glue** için ise test senaryolarınızın olduğu package’ın ismini vermelisiniz.
 
-> **Test1:**
+> ## **Scenario :** Product search in the search box
 
-**Scenario :** Product search in the search box
+◼️ Enter product name "parfüm"
 
-**Result :** Aratılan ürünle ilgili **başarılı** bir arama sonucu döndüğü görülmüştür.
+◼️ Click search button
 
-![image](https://user-images.githubusercontent.com/55894683/145225135-262d9b14-25dd-4678-9bf5-f7dfea221c49.png)
+◼️ Verify search result in "ürün listeleniyor"
 
-> **Test2:**
+***Assertion : Search result in "ürün listeleniyor"***
 
-**Scenario Outline :** Product search with alphanumeric characters and special characters in the search box
+```
+   Assert.assertTrue(productsFoundText.contains(productList));
+```
 
-**Result :** Aratılan alfanumerik ve özel karakter içeren ürünle ilgili **başarısız** bir arama sonucu döndüğü görülmüştür.
 
-![image](https://user-images.githubusercontent.com/55894683/145225382-760ecc01-a209-46fe-b8e2-af1a1109e0d9.png)
-![image](https://user-images.githubusercontent.com/55894683/145225400-eca4ca59-3a2d-413b-baa6-97982ac353ad.png)
+> ## **Scenario Outline :** Product search with alphanumeric characters and special characters in the search box
 
-> **Test3:**
-
-**Scenario :** Clearing the entered product name
-
-**Result :** Girilen ürün adının doğru bir şekilde silindiği görülmüştür.
-
-![image](https://user-images.githubusercontent.com/55894683/145225754-69c2fa43-dd27-487c-a02c-b85a6aeb5f6b.png)
-
- ![image](https://user-images.githubusercontent.com/55894683/145225772-cbdba1fa-4dd9-412a-b8c9-80c41c041240.png)
+◼️ Enter product name "productName"
  
+◼️ Click search button
+ 
+◼️ Verify failed search result "için sonuç bulunamamıştır."
+ 
+     Examples:
+      | productName |
+      | 1234q5w6    |
+      | ..,-*/      |
+      
 
+***Assertion : failed search result "için sonuç bulunamamıştır."***
+
+```
+   Assert.assertTrue(noFoundText.contains(noFound));
+```
+
+
+> ## **Scenario :** Clearing the entered product name
+
+◼️ Enter product name "oje"
+
+◼️ Click reset button
+
+◼️ Verify that the entered product name is deleted
+
+
+***Assertion : When the product name is deleted, the suggestion pop up is checked***
+
+```
+   Boolean value = methods.isDisplayed(suggestionPopup);
+   Assert.assertTrue(value);
+```
 
 ![ssss](https://user-images.githubusercontent.com/55894683/144934347-5ced7f60-6c25-4199-9d59-1bcf6cf08be2.PNG)
 
