@@ -6,10 +6,18 @@
 
 ◻️ Bir test projesi oluşturacağımız için ilk olarak **pytest import** etmemiz gerekmektedir.
 
-◻️ Proje hakkında daha fazla bilgi için medium yazımı okuyabilirsiniz. -->[Python ile Otomasyon Testi](https://fatosgorur.medium.com/python-ile-otomasyon-testi-821ea8a533e3)
+◻️ Proje hakkında daha fazla bilgi için medium yazımı okuyabilirsiniz. -->[Python ile Test Otomasyon](https://fatosgorur.medium.com/python-ile-otomasyon-testi-821ea8a533e3)
 
 
-> **TestLogin : test_login()**
+> ## **TestLogin : test_login()**
+
+◻️ Navigate to "https://www.amazon.com.tr"
+
+◻️ Hover to "Hesap ve Listeler"
+
+◻️ Login is done by entering e-mail and password
+
+◻️ The login process is checked
 
 **Assertion : My username is the same as the username on the home page**
 
@@ -18,7 +26,22 @@
 ```
 
 
-> **TestProduct : test_best_sellers_category()**
+> ## **TestProduct : test_best_sellers_category()**
+
+◻️ Navigate to "https://www.amazon.com.tr"
+
+◻️ Hover to "Hesap ve Listeler"
+
+◻️ Login is done by entering e-mail and password
+
+◻️ Click on "Elektronik" menu
+
+◻️ Click shop by category "Cep Telefonları ve Aksesuarlar"
+
+◻️ Click bestsellers "Daha fazla gör"
+
+◻️ Page title is checked
+
 
 **Assertion : Check best sellers category page for mobile phones and accessories**
 
@@ -26,7 +49,23 @@
    assert page_title != result_page
 ```
 
-> **TestProductDetail :  test_selected_product_name()**
+> ## **TestProductDetail :  test_selected_product_name()**
+
+◻️ Navigate to "https://www.amazon.com.tr"
+
+◻️ Hover to "Hesap ve Listeler"
+
+◻️ Login is done by entering e-mail and password
+
+◻️ Click on "Elektronik" menu
+
+◻️ Click shop by category "Cep Telefonları ve Aksesuarlar"
+
+◻️ Click bestsellers "Daha fazla gör"
+
+◻️ Select the first product on the search result page 
+
+◻️ Check selected product name
 
 **Assertion : Check selected product name**
 
@@ -34,7 +73,25 @@
      assert first_product_name == product_name
 ```
 
-> **TestCart() : test_check_cart_status()**
+> ## **TestCart() : test_check_cart_status()**
+
+◻️ Navigate to "https://www.amazon.com.tr"
+
+◻️ Hover to "Hesap ve Listeler"
+
+◻️ Login is done by entering e-mail and password
+
+◻️ Click on "Elektronik" menu
+
+◻️ Click shop by category "Cep Telefonları ve Aksesuarlar"
+
+◻️ Click bestsellers "Daha fazla gör"
+
+◻️ Select the first product on the search result page 
+
+◻️ Click shopping cart
+
+◻️ Check the status in the cart
 
 **Assertion : Check the status in the cart** 
 
