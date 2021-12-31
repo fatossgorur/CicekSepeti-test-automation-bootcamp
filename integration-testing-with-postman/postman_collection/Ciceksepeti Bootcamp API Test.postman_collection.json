@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "63e3a87b-6b34-403a-9e57-9a58395274ac",
+		"name": "Ciceksepeti Bootcamp API Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "cityName_ankara",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"pm.test(\"Response Control for Response Body \",() => {\r",
+							"    pm.expect(responseBody).to.include(\"reviewDtos\").to.include(\"name\");\r",
+							"    pm.expect(responseBody).to.include(\"reviewDtos\").to.include(\"comment\");\r",
+							"    pm.expect(responseBody).to.include(\"reviewDtos\").to.include(\"rating\");\r",
+							"    pm.expect(responseBody).to.include(\"reviewDtos\").to.include(\"createOn\");\r",
+							"    pm.expect(responseBody).to.include(\"reviewDtos\").to.include(\"regionName\");\r",
+							"    pm.expect(responseBody).to.include(\"reviewDtos\").to.include(\"cityName\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Control for ReviewDtos Types \",() => { \r",
+							"    jsonData.reviewDtos.map((reviewDtos)=> { \r",
+							"        pm.expect(reviewDtos.name).to.be.a(\"string\")\r",
+							"        pm.expect(reviewDtos.comment).to.be.a(\"string\") \r",
+							"        pm.expect(reviewDtos.rating).to.be.a(\"number\")\r",
+							"        pm.expect(reviewDtos.createOn).to.be.a(\"string\")\r",
+							"        pm.expect(reviewDtos.regionName).to.be.a(\"string\")\r",
+							"        pm.expect(reviewDtos.cityName).to.be.a(\"string\")\r",
+							"    })\r",
+							"}); \r",
+							"\r",
+							"pm.test(\"Response Control for Comment Count\", () => {\r",
+							"for (var i = 0; i < jsonData.reviewDtos.length; i++) {\r",
+							"    const commentCount= Object.keys(jsonData.reviewDtos[i]).length;\r",
+							"    //console.log(commentCount);\r",
+							"    if(commentCount === 0){\r",
+							"        console.log(\"TEST FAILED\");\r",
+							"    }  \r",
+							"}\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Control for Commented Cities\",() => { \r",
+							"    var requestValue = pm.request.toJSON().url.query[0].value;\r",
+							"    jsonData.reviewDtos.map((reviewDtos)=> {  \r",
+							"        pm.expect(reviewDtos.cityName).to.be.eql(requestValue.toUpperCase())\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Control for Status Code : 200\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}?cityName=ankara",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"query": [
+						{
+							"key": "cityName",
+							"value": "ankara"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "?cityName=ankara",
+							"query": [
+								{
+									"key": "cityName",
+									"value": "ankara"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n  \"paginationResponse\": {\n    \"pageItemsCount\": 20,\n    \"totalItemsCount\": 25005,\n    \"totalPageCount\": 1251\n  },\n  \"totalCount\": 25005,\n  \"starDtos\": [\n    {\n      \"point\": 1,\n      \"percent\": 5,\n      \"count\": 1228\n    },\n    {\n      \"point\": 2,\n      \"percent\": 1,\n      \"count\": 362\n    },\n    {\n      \"point\": 3,\n      \"percent\": 2,\n      \"count\": 606\n    },\n    {\n      \"point\": 4,\n      \"percent\": 9,\n      \"count\": 2247\n    },\n    {\n      \"point\": 5,\n      \"percent\": 82,\n      \"count\": 20562\n    }\n  ],\n  \"averageRate\": 4.5,\n  \"averageAllReviewsRate\": 4.5,\n  \"reviewDtos\": [\n    {\n      \"name\": \"Name Surname\",\n      \"comment\": \"10 luk hizmet \",\n      \"rating\": 10,\n      \"createOn\": \"2021-12-16T08:36:02.101Z\",\n      \"regionName\": \"\",\n      \"cityName\": \"ANKARA\"\n    },\n    {\n      \"name\": \"Name Surname 2\",\n      \"comment\": \"Kaliteli Kargo\",\n      \"rating\": 10,\n      \"createOn\": \"2021-12-16T08:31:53.078Z\",\n      \"regionName\": \"\",\n      \"cityName\": \"ANKARA\"\n    },\n    {\n      \"name\": \"Name Surname 3\",\n      \"comment\": \"Hızlı kargo ve sürpriz için teşekkürler\",\n      \"rating\": 10,\n      \"createOn\": \"2021-12-16T07:49:34.927Z\",\n      \"regionName\": \"\",\n      \"cityName\": \"ANKARA\"\n    },\n    {\n      \"name\": \"Name Surname 4\",\n      \"comment\": \"Eşime aldım, gönderilmedi\",\n      \"rating\": 0,\n      \"createOn\": \"2021-12-16T07:08:19.8Z\",\n      \"regionName\": \"\",\n      \"cityName\": \"HATAY\"\n    }\n  ]\n}"
+				}
+			]
+		},
+		{
+			"name": "cityName_istanbul",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"pm.test(\"Response Control for Response Body \",() => {\r",
+							"    pm.expect(responseBody).to.include(\"reviewDtos\").to.include(\"name\");\r",
+							"    pm.expect(responseBody).to.include(\"reviewDtos\").to.include(\"comment\");\r",
+							"    pm.expect(responseBody).to.include(\"reviewDtos\").to.include(\"rating\");\r",
+							"    pm.expect(responseBody).to.include(\"reviewDtos\").to.include(\"createOn\");\r",
+							"    pm.expect(responseBody).to.include(\"reviewDtos\").to.include(\"regionName\");\r",
+							"    pm.expect(responseBody).to.include(\"reviewDtos\").to.include(\"cityName\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Control for ReviewDtos Types \",() => { \r",
+							"    jsonData.reviewDtos.map((reviewDtos)=> { \r",
+							"        pm.expect(reviewDtos.name).to.be.a(\"string\")\r",
+							"        pm.expect(reviewDtos.comment).to.be.a(\"string\") \r",
+							"        pm.expect(reviewDtos.rating).to.be.a(\"number\")\r",
+							"        pm.expect(reviewDtos.createOn).to.be.a(\"string\")\r",
+							"        pm.expect(reviewDtos.regionName).to.be.a(\"string\")\r",
+							"        pm.expect(reviewDtos.cityName).to.be.a(\"string\")\r",
+							"    })\r",
+							"}); \r",
+							"\r",
+							"pm.test(\"Response Control for Comment Count\", () => {\r",
+							"for (var i = 0; i < jsonData.reviewDtos.length; i++) {\r",
+							"    const commentCount= Object.keys(jsonData.reviewDtos[i]).length;\r",
+							"    //console.log(commentCount);\r",
+							"    if(commentCount === 0){\r",
+							"        console.log(\"TEST FAILED\");\r",
+							"    }  \r",
+							"}\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Control for Commented Cities\",() => { \r",
+							"    var requestValue = pm.request.toJSON().url.query[0].value;\r",
+							"    jsonData.reviewDtos.map((reviewDtos)=> {  \r",
+							"        pm.expect(reviewDtos.cityName).to.be.eql(requestValue.toUpperCase())\r",
+							"    })\r",
+							"}); \r",
+							"\r",
+							"pm.test(\"Response Control for Status Code : 200\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}?cityName=istanbul",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"query": [
+						{
+							"key": "cityName",
+							"value": "istanbul"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "?cityName=istanbul",
+							"query": [
+								{
+									"key": "cityName",
+									"value": "istanbul"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n  \"paginationResponse\": {\n    \"pageItemsCount\": 20,\n    \"totalItemsCount\": 25005,\n    \"totalPageCount\": 1251\n  },\n  \"totalCount\": 25005,\n  \"starDtos\": [\n    {\n      \"point\": 1,\n      \"percent\": 5,\n      \"count\": 1228\n    },\n    {\n      \"point\": 2,\n      \"percent\": 1,\n      \"count\": 362\n    },\n    {\n      \"point\": 3,\n      \"percent\": 2,\n      \"count\": 606\n    },\n    {\n      \"point\": 4,\n      \"percent\": 9,\n      \"count\": 2247\n    },\n    {\n      \"point\": 5,\n      \"percent\": 82,\n      \"count\": 20562\n    }\n  ],\n  \"averageRate\": 4.5,\n  \"averageAllReviewsRate\": 4.5,\n  \"reviewDtos\": [\n    {\n      \"name\": \"Name Surname\",\n      \"comment\": \"10 luk hizmet \",\n      \"rating\": 10,\n      \"createOn\": \"2021-12-16T08:36:02.101Z\",\n      \"regionName\": \"\",\n      \"cityName\": \"ISTANBUL\"\n    },\n    {\n      \"name\": \"Name Surname 2\",\n      \"comment\": \"Kaliteli Kargo\",\n      \"rating\": 10,\n      \"createOn\": \"2021-12-16T08:31:53.078Z\",\n      \"regionName\": \"\",\n      \"cityName\": \"ISTANBUL\"\n    },\n    {\n      \"name\": \"Name Surname 3\",\n      \"comment\": \"Hızlı kargo ve sürpriz için teşekkürler\",\n      \"rating\": 10,\n      \"createOn\": \"2021-12-16T07:49:34.927Z\",\n      \"regionName\": \"\",\n      \"cityName\": \"ISTANBUL\"\n    },\n    {\n      \"name\": \"Name Surname 4\",\n      \"comment\": \"Eşime aldım, gönderilmedi\",\n      \"rating\": 0,\n      \"createOn\": \"2021-12-16T07:08:19.8Z\",\n      \"regionName\": \"\",\n      \"cityName\": \"ISTANBUL\"\n    }\n  ]\n}"
+				}
+			]
+		},
+		{
+			"name": "cityName_van",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response Control for Response Body \",() => {\r",
+							"    pm.expect(responseBody).to.not.include(\"reviewDtos\");\r",
+							"    pm.expect(responseBody).to.not.include(\"starDtos\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Control for Status Code : 404\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Control for Status Code Name\", () => {\r",
+							"  pm.response.to.have.status(\"Not Found\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Control for Message \",() => {\r",
+							"    pm.expect(responseBody).to.include(\"message\").to.contain(\"Not Found\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Should Be Error\",() => { \r",
+							"    pm.response.to.be.error; \r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}?cityName=van",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"query": [
+						{
+							"key": "cityName",
+							"value": "van"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "?cityName=van",
+							"query": [
+								{
+									"key": "cityName",
+									"value": "van"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n  \"message\": \"Not Found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "cityName is null",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"console.log(pm.environment.get(\"cityName\"));\r",
+							"\r",
+							"pm.test(\"Response Control for Response Body \",() => {\r",
+							"    pm.expect(responseBody).to.not.include(\"reviewDtos\");\r",
+							"    pm.expect(responseBody).to.not.include(\"starDtos\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Control for Status Code : 400\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Control for Status Code Name\", () => {\r",
+							"  pm.response.to.have.status(\"Bad Request\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Body Control for City Name \",() => {\r",
+							"    pm.expect(responseBody).to.contain(\"'cityName' can not be null.\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Should Be Error\",() => { \r",
+							"    pm.response.to.be.error; \r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}?cityName",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"query": [
+						{
+							"key": "cityName",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "?cityName=",
+							"query": [
+								{
+									"key": "cityName",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n  \"cityName\": [\n    \"'cityName' can not be null.\"\n  ]\n}"
+				}
+			]
+		}
+	]
+}
